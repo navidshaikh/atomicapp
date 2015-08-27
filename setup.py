@@ -19,6 +19,7 @@
  along with Atomic App. If not, see <http://www.gnu.org/licenses/>.
 """
 
+import os
 import re
 
 from setuptools import setup, find_packages
@@ -36,11 +37,21 @@ def _get_requirements(path):
 
 
 def _install_requirements():
-    requirements = _get_requirements('requirements.txt')
+    requirements = _get_requirements(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__),
+                            'requirements.txt')
+        )
+    )
     return requirements
 
 def _get_version():
-    version = _get_requirements('VERSION')
+    version = _get_requirements(
+        os.path.join(
+            os.path.dirname(os.path.abspath(__file__),
+                            'VERSION')
+        )
+    )
     return version[0]
 
 setup(
